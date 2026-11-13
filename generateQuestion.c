@@ -69,6 +69,6 @@ int main()
 	generateQuestion(op, &num1, &num2);
 	char operator;
 	getOpChar(&operator,&op);
-	printf("本次题目：%d %c %d = ?", num1, operator, num2);//打印题目
+	printf("本次题目：%d %c %d = ?", num1, operator, num2);//打印出题目
 	return 0;
 }
