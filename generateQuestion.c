@@ -7,15 +7,14 @@ void initSystem()////³õÊ¼»¯£¬ÒıÈësrandº¯ÊıºÍtimeº¯Êı£¬ÒÔ¹©ºóĞøÉú³ÉËæ»úÊı£¬´òÓ¡Ïµ
 	srand(time(NULL));
 	printf("==========ÖÇÄÜ¿ÚËãÏµÍ³==========\n");
 }
-void generateQuestion(int type, int* num1, int* num2, int* op)//´«½ønum£¬ÈÃº¯ÊıÉú³ÉËæ»úÊı²¢¸³Öµ¸ønum1ºÍnum2£¬´«½øop£¬ÈÃº¯ÊıÉú³ÉÔËËã·ûÀàĞÍ²¢¸³Öµ¸øop
+void generateQuestion(int op, int* num1, int* num2)//´«½ønum£¬ÈÃº¯ÊıÉú³ÉËæ»úÊı²¢¸³Öµ¸ønum1ºÍnum2£¬´«½øop£¬ÈÃº¯ÊıÉú³ÉÔËËã·ûÀàĞÍ²¢¸³Öµ¸øop
 {
-	*op = type;
-	if (type == 0)//¼Ó·¨
+	if (op == 0)//¼Ó·¨
 	{
 		*num1 = rand() % 90 + 10;
 		*num2 = rand() % 90 + 10;
 	}
-	else if (type == 1)//¼õ·¨
+	else if (op == 1)//¼õ·¨
 	{
 		*num1 = rand() % 90 + 10;
 		*num2 = rand() % 90 + 10;
@@ -27,21 +26,21 @@ void generateQuestion(int type, int* num1, int* num2, int* op)//´«½ønum£¬ÈÃº¯ÊıÉ
 			*num2 = tmp;
 		}
 	}
-	else if (type == 2)//³Ë·¨
+	else if (op == 2)//³Ë·¨
 	{
 		*num1 = rand() % 9 + 1;
 		*num2 = rand() % 9 + 1;
 	}
-	else if (type == 3)//³ı·¨
+	else if (op == 3)//³ı·¨
 	{
 		*num2 = rand() % 9 + 1;//³ıÊı
 		int result = rand() % 9 + 1;//ÉÌ
 		*num1 = (*num2) * result;//±»³ıÊı
 	}
 }
-void random(int* type)//ÓÃ0-3±íÊ¾ËÄÖÖÔËËãÀàĞÍ£¬0Îª¼Ó·¨£¬1Îª¼õ·¨£¬2Îª³Ë·¨£¬3Îª³ı·¨
+void random(int* op)//ÓÃ0-3±íÊ¾ËÄÖÖÔËËãÀàĞÍ£¬0Îª¼Ó·¨£¬1Îª¼õ·¨£¬2Îª³Ë·¨£¬3Îª³ı·¨
 {
-	*type = rand() % 4 + 0;
+	*op = rand() % 4 + 0;
 }
 void getOpChar(char* operator,int* op)//¸ù¾İopµÄÖµ£¬¸øoperator¸³ÖµÎª¶ÔÓ¦µÄÔËËã·û£¬ÓÃÓÚÊä³öÔËËã·ûºÅ
 {
@@ -65,11 +64,11 @@ void getOpChar(char* operator,int* op)//¸ù¾İopµÄÖµ£¬¸øoperator¸³ÖµÎª¶ÔÓ¦µÄÔËËã·û
 int main()
 {
 	initSystem();//³õÊ¼»¯ÏµÍ³
-	int num1, num2, op, type;
-	random(&type);//Ëæ»úÉú³ÉÔËËãÀàĞÍ
-	generateQuestion(type, &num1, &num2, &op);
+	int num1, num2, op;
+	random(&op);//Ëæ»úÉú³ÉÔËËãÀàĞÍ
+	generateQuestion(op, &num1, &num2);
 	char operator;
 	getOpChar(&operator,&op);
-	printf("±¾´ÎÌâÄ¿£º%d %c %d = ?", num1, operator, num2);
+	printf("±¾´ÎÌâÄ¿£º%d %c %d = ?", num1, operator, num2);//´òÓ¡ÌâÄ¿
 	return 0;
 }
