@@ -7,19 +7,19 @@ void initSystem()////初始化，引入srand函数和time函数，以供后续生成随机数，打印系
 	srand(time(NULL));
 	printf("==========智能口算系统==========\n");
 }
-void generateQuestion(int type, int* num1, int* num2, int* op)
+void generateQuestion(int type, int* num1, int* num2, int* op)//传进num，让函数生成随机数并赋值给num1和num2，传进op，让函数生成运算符类型并赋值给op
 {
 	*op = type;
-	if (type == 0)
+	if (type == 0)//加法
 	{
 		*num1 = rand() % 90 + 10;
 		*num2 = rand() % 90 + 10;
 	}
-	else if (type == 1)
+	else if (type == 1)//减法
 	{
 		*num1 = rand() % 90 + 10;
 		*num2 = rand() % 90 + 10;
-		if (*num1 < *num2)
+		if (*num1 < *num2)//保证被减数大于减数，否则交换两个数
 		{
 			int tmp;
 			tmp = *num1;
@@ -27,23 +27,23 @@ void generateQuestion(int type, int* num1, int* num2, int* op)
 			*num2 = tmp;
 		}
 	}
-	else if (type == 2)
+	else if (type == 2)//乘法
 	{
 		*num1 = rand() % 9 + 1;
 		*num2 = rand() % 9 + 1;
 	}
-	else if (type == 3)
+	else if (type == 3)//除法
 	{
-		*num2 = rand() % 9 + 1;
-		int result = rand() % 9 + 1;
-		*num1 = (*num2) * result;
+		*num2 = rand() % 9 + 1;//除数
+		int result = rand() % 9 + 1;//商
+		*num1 = (*num2) * result;//被除数
 	}
 }
 void random(int* type)//用0-3表示四种运算类型，0为加法，1为减法，2为乘法，3为除法
 {
 	*type = rand() % 4 + 0;
 }
-void getOpChar(char* operator,int* op)
+void getOpChar(char* operator,int* op)//根据op的值，给operator赋值为对应的运算符，用于输出运算符号
 {
 	if (*op == 0)
 	{
@@ -65,11 +65,11 @@ void getOpChar(char* operator,int* op)
 int main()
 {
 	initSystem();//初始化系统
-	int a, b, op, type;
+	int num1, num2, op, type;
 	random(&type);//随机生成运算类型
-	generateQuestion(type, &a, &b, &op);
+	generateQuestion(type, &num1, &num2, &op);
 	char operator;
 	getOpChar(&operator,&op);
-	printf("本次题目：%d %c %d = ?", a, operator, b);
+	printf("本次题目：%d %c %d = ?", num1, operator, num2);
 	return 0;
 }
